@@ -1,6 +1,14 @@
 {
-  "name": "rcon-webapp",
-  "version": "0.1.0",
+  "name": "pixplaze-mc-webapp",
+  "version": "v0.1.0-dev",
+  "author": {
+    "name": "emberati"
+  },
+  "keywords": [
+    "vue",
+    "minecraft",
+    "server"
+  ],
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
