@@ -1,0 +1,10 @@
+:root {
+  --color-main-foreground: #FEFFFE;
+  --color-dark: #333333;
+  --color-semi-dark: #464646;
+
+  --color-green-grass: #74B44A;
+  --color-green-grass-transparent: #74B44A50;
+  --color-green-grass-dark: #509026;
+  --color-brown-dirt: #79553A;
+}

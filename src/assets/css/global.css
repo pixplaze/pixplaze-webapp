@@ -1,0 +1,27 @@
+p, a, span, i, label, button, input {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--color-main-font);
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat';
+    color: var(--color-main-font);
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+h2 {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 14px;
+}

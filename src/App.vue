@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <rcon-console/>
+  <section class="test">
+    <mc-button :variant="'submit'">Суперкек</mc-button>
+    <mc-button>Суперкек</mc-button>
+    <mc-button>Суперкек</mc-button>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import RconConsole from '@/components/RconConsole'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    RconConsole
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  font-family: 'Montserrat';
+}
+
+section.test {
+  margin: 20px;
+  margin-top: 50px;
 }
 </style>
