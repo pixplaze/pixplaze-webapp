@@ -44,7 +44,7 @@ export default {
   background-repeat: repeat-x;
   background-color: var(--color-brown-dark);
 
-  transition-property: top, bottom;
+  transition-property: top, bottom, transform;
   transition-duration: 0.1s;
   transition-timing-function: ease;
 }
@@ -53,11 +53,11 @@ export default {
   display: flex;
   font-family: 'Minecraft';
   color: white;
-  height: 60%;
+  height: 100%;
 
   background-color: var(--color-green-grass-light);
 
-  transition-property: height;
+  transition-property: height, transform;
   transition-duration: 0.1s;
   transition-timing-function: ease;
 }
@@ -69,11 +69,13 @@ export default {
 }
 
 .grass-button:hover .grass-text {
-  height: 50%;
+  height: 70%;
 }
 
-.grass-button:active .grass-text {
-  height: 100%;
+.grass-button:active .grass-text,
+.grass-button:active .grass-block {
+  /* height: 100%; */
+  transform: translateY(5px);
 }
 
 .grass-button:focus {
@@ -81,6 +83,6 @@ export default {
 }
 
 .grass-button:active {
-  transform: translateY(5px);
+  /* transform: scale(0.98); */
 }
 </style>
