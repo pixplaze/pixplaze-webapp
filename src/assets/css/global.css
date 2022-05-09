@@ -25,3 +25,26 @@ h3 {
     font-weight: 500;
     font-size: 14px;
 }
+
+.button {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 1;
+  
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+  
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  
+    font-family: 'Minecraft';
+    background-color: transparent;
+  
+    transition-property: box-shadow, border, background-color, padding;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+  }

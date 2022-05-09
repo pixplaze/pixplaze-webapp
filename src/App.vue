@@ -1,9 +1,12 @@
 <template>
   <rcon-console/>
   <section class="test">
-    <mc-button :variant="'submit'">Суперкек</mc-button>
+    <grass-button></grass-button>
     <mc-button>Суперкек</mc-button>
     <mc-button>Суперкек</mc-button>
+  </section>
+  <section class="test">
+    <menu-button/>
   </section>
 </template>
 
@@ -24,6 +27,7 @@ export default {
 }
 
 section.test {
+  display: flex;
   margin: 20px;
   margin-top: 50px;
 }
