@@ -1,7 +1,8 @@
 <template>
   <rcon-console/>
   <section class="test">
-    <grass-button></grass-button>
+    <textured-button>Трава зелёная</textured-button>
+    <textured-button :variant="'stone'">Я каменб</textured-button>
     <mc-button>Суперкек</mc-button>
     <mc-button>Суперкек</mc-button>
   </section>
