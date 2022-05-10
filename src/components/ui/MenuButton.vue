@@ -26,14 +26,14 @@ export default {
 
 <style scoped>
 .menu-button {
-  width: 40px;
+  width: 35px;
   height: 35px;
 
   display: grid;
   grid-template-rows: 5px 5px 5px;
   gap: 5px;
-
   padding: 5px;
+  padding-left: 0;
   border: none;
   /* box-shadow: 0 0 0 1px red; */
   background-color: transparent;
