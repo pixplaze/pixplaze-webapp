@@ -1,9 +1,9 @@
 import McButton from '@/components/ui/McButton'
 import MenuButton from '@/components/ui/MenuButton'
-import GrassButton from '@/components/ui/GrassButton'
+import TexturedButton from '@/components/ui/TexturedButton'
 
 export default [
     McButton,
     MenuButton,
-    GrassButton
+    TexturedButton
 ]

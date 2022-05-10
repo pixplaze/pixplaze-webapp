@@ -41,7 +41,8 @@ export default {
 
 .row {
   height: 5px;
-  background-color: var(--color-semi-dark);
+  /* background-color: var(--color-semi-dark); */
+  background-color: #dfdfdf;
 
   transition-property: background-color, width, transform;
   transition-duration: 0.1s;
@@ -54,11 +55,11 @@ export default {
 }
 
 .row.middle {
-    width: 80%;
+    width: 90%;
 }
 
 .row.lower {
-    width: 70%;
+    width: 80%;
 }
 
 .menu-button:hover .row {
@@ -70,17 +71,20 @@ export default {
 }
 
 .menu-button:hover .row.middle {
-  background-color: var(--color-green-grass-light);
+  background-color: var(--color-brown-dark);
 }
 
 .menu-button:hover .row.lower {
   background-color: var(--color-brown-dark);
 }
 
+.menu-button.expanded .row {
+  height: 5px;
+}
+
 .menu-button.expanded .row.upper {
-  top: 0;
   width: 100%;
-  transform: translateY(10px) rotate(135deg);
+  transform: translateY(10px) rotate(-45deg);
 }
 
 .menu-button.expanded .row.middle {
@@ -90,6 +94,6 @@ export default {
 
 .menu-button.expanded .row.lower {
   width: 100%;
-  transform: translateY(-10px) rotate(135deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 </style>
