@@ -7,6 +7,7 @@ export default {
   methods: {
     onClick() {
       this.expanded = !this.expanded
+      this.$emit('update:expanded', this.expanded)
     }
   }
 }
@@ -51,15 +52,15 @@ export default {
 }
 
 .row.upper {
-    width: 60%;
+  width: 60%;
 }
 
 .row.middle {
-    width: 90%;
+  width: 90%;
 }
 
 .row.lower {
-    width: 80%;
+  width: 80%;
 }
 
 .menu-button:hover .row {

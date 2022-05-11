@@ -1,10 +1,25 @@
 <script>
 import HeaderNav from '@/components/HeaderNav'
+import { storeToRefs } from 'pinia'
+import { useGlobalStore } from '@/store/global.js'
 
 export default {
   name: 'holygrail-template',
   components: {
     HeaderNav
+  },
+  setup() {
+    const global = useGlobalStore()
+
+    const {
+      loading,
+      asideExpanded
+    } = storeToRefs(global)
+
+    return {
+      loading,
+      asideExpanded
+    }
   }
 }
 </script>
@@ -12,14 +27,19 @@ export default {
 <template>
 <div class="page-wrapper">
   <header>
-    <header-nav/>
+    <header-nav v-model:asideExpanded="asideExpanded"/>
+    <linear-loader v-if="loading"/>
   </header>
   <div class="page-body content">
-    <aside>
+    <aside :class="{'expanded': asideExpanded}">
       
     </aside>
     <main>
-              
+      <section class="content"><cubic-loader v-if="loading"/></section>
+      <section class="content">
+          <textured-button :variant="'grass'">sdf</textured-button>
+          <textured-button :variant="'stone'"></textured-button>
+      </section>
     </main>
   </div>
   <footer>
@@ -29,10 +49,14 @@ export default {
 </template>
 
 <style>
+/** */
+
+/** */
 html, body, #app, .page-wrapper {
   height: 100%;
   background-color: var(--color-gray-silver);
 }
+
 .page-wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -41,6 +65,10 @@ html, body, #app, .page-wrapper {
 .content {
   padding-left: 30px;
   padding-right: 30px;
+}
+
+section.content {
+  margin-top: 50px;
 }
 
 header {
@@ -62,9 +90,15 @@ footer {
 }
 
 aside {
-  min-width: 500px;
+  min-width: 0;
   background-color: var(--color-gray-silver);
+  transition: min-width .5s ease;
 }
+
+aside.expanded {
+  min-width: 375px;
+}
+
 
 main {
   width: 100%;
