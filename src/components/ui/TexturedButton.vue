@@ -9,6 +9,7 @@ export default {
 
 <template>
   <button class="textured-button button" :class="variant? variant : ''" type="button">
+    <slot>Класс, блок</slot>
     <div class="textured-wrapper">
       <div class="textured-text"><span><slot>Класс, блок</slot></span></div>
       <div class="textured-block"></div>
@@ -19,14 +20,14 @@ export default {
 <style scoped>
 .textured-button {
   width: fit-content;
-  padding: 0;
 
   border: none;
 }
 
 .textured-wrapper {
-  display: block;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: hidden;
   z-index: 1;
   width: 100%;
