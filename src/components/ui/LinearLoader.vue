@@ -6,7 +6,7 @@ export default {
 
 <template>
 <div class="linear-loader">
-  <div class="row upper"></div>
+  <!-- <div class="row upper"></div> -->
   <div class="row middle"></div>
   <div class="row lower"></div>
 </div>
@@ -30,19 +30,19 @@ export default {
   .upper {
     z-index: 2;
     background-color: var(--color-brown-dark);
-    animation: anim-upper 1.5s ease infinite;
+    animation: anim-upper 2s ease infinite;
   }
 
   .middle {
     z-index: 1;
     background-color: var(--color-green-grass-dark);
-    animation: anim-middle 1.5s ease infinite;
+    animation: anim-middle 2s ease infinite;
   }
 
   .lower {
     z-index: 0;
     background-color: var(--color-green-grass-transparent);
-    animation: anim-lower 1.5s ease infinite;
+    animation: anim-lower 2s ease infinite;
   }
 
 

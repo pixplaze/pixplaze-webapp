@@ -1,6 +1,9 @@
 <script>
 export default {
   name: 'menu-button',
+  props: {
+    // expanded: Boolean
+  },
   data: () => ({
     expanded: false
   }),
@@ -96,5 +99,9 @@ export default {
 .menu-button.expanded .row.lower {
   width: 100%;
   transform: translateY(-10px) rotate(-45deg);
+}
+
+.menu-button.expanded:hover .row {
+  background-color: var(--color-green-grass);
 }
 </style>
