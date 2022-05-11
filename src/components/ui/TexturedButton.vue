@@ -76,7 +76,7 @@ export default {
 }
 
 .textured-button:active .textured-wrapper {
-  transform: translateY(5px);
+  transform: translateY(15px);
 }
 
 /* STONE STYLE */

@@ -35,10 +35,14 @@ export default {
       
     </aside>
     <main>
-      <section class="content"><cubic-loader v-if="loading"/></section>
+      <section class="content"><cubic-loader v-if="loading" :variant="''"/></section>
       <section class="content">
-          <textured-button :variant="'grass'">sdf</textured-button>
-          <textured-button :variant="'stone'"></textured-button>
+          <textured-button
+            style="padding-top: 20px; padding-bottom: 20px"
+            :variant="'grass'">
+              Купить
+          </textured-button>
+          <!-- <textured-button :variant="'stone'"></textured-button> -->
       </section>
     </main>
   </div>
@@ -78,7 +82,7 @@ header {
 footer {
   height: 300px;
   content: "";
-  background: url(../dev/assets/background.png);
+  background: url(../dev/background.png);
 }
 
 .footer-info {
