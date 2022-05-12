@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 
 export const useGlobalStore = defineStore('global', {
   state: () => ({
-    loading: true,
+    loading: false,
     asideExpanded: false
   }),
   getters: {

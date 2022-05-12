@@ -3,8 +3,10 @@ import HeaderNav from '@/components/HeaderNav'
 import { storeToRefs } from 'pinia'
 import { useGlobalStore } from '@/store/global.js'
 
+// const background = require('@/dev/assets/background.png')
+
 export default {
-  name: 'holygrail-template',
+  name: 'holygrail-layout',
   components: {
     HeaderNav
   },
@@ -32,18 +34,10 @@ export default {
   </header>
   <div class="page-body content">
     <aside :class="{'expanded': asideExpanded}">
-      
+      <!-- <slot name="aside"></slot> -->
     </aside>
     <main>
-      <section class="content"><cubic-loader v-if="loading" :variant="''"/></section>
-      <section class="content">
-          <textured-button
-            style="padding-top: 20px; padding-bottom: 20px"
-            :variant="'grass'">
-              Купить
-          </textured-button>
-          <!-- <textured-button :variant="'stone'"></textured-button> -->
-      </section>
+      <slot></slot>
     </main>
   </div>
   <footer>
@@ -82,7 +76,7 @@ header {
 footer {
   height: 300px;
   content: "";
-  background: url(../dev/background.png);
+  background: url(../../dev/background.png);
 }
 
 .footer-info {
