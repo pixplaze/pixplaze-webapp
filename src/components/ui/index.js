@@ -4,10 +4,17 @@ import TexturedButton from '@/components/ui/TexturedButton'
 import LinearLoader from '@/components/ui/LinearLoader'
 import CubicLoader from '@/components/ui/CubicLoader'
 
-export default [
-    McButton,
-    MenuButton,
-    TexturedButton,
-    LinearLoader,
-    CubicLoader
+ const uis = [
+  McButton,
+  MenuButton,
+  TexturedButton,
+  LinearLoader,
+  CubicLoader
 ]
+
+function registerUIs(app) {
+  uis.forEach(ui => app.component(ui.name, ui))
+}
+
+export {registerUIs}
+export default uis
