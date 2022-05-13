@@ -7,6 +7,7 @@ import ServerPage from '@/components/pages/ServerPage'
 const routes = [
   {
     path: '/',
+    name: 'index',
     component: MainPage,
     meta: {
       layout: 'holygrail-layout'
@@ -14,6 +15,7 @@ const routes = [
   },
   {
     path: '/profile/:id',
+    name: 'profile',
     component: ProfilePage,
     meta: {
       layout: 'holygrail-layout'
@@ -21,6 +23,7 @@ const routes = [
   },
   {
     path: '/servers',
+    name: 'servers',
     component: ServersPage,
     meta: {
       layout: 'holygrail-layout'
@@ -28,6 +31,7 @@ const routes = [
   },
   {
     path: '/servers/:id',
+    name: 'server',
     component: ServerPage,
     meta: {
       layout: 'holygrail-layout'
