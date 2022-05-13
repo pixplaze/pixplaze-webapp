@@ -37,6 +37,7 @@ export default {
       <!-- <slot name="aside"></slot> -->
     </aside>
     <main>
+      <!-- <slot name="main"></slot> -->
       <slot></slot>
     </main>
   </div>
