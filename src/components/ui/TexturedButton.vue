@@ -45,7 +45,7 @@ export default {
 
   left: 0;
 
-  background: url('../../dev/grass_1.png');
+  background: url('../../assets/img/grass_1.png');
   background-repeat: repeat-x;
   background-color: var(--color-brown-dark);
 }
@@ -82,7 +82,7 @@ export default {
 /* STONE STYLE */
 
 .textured-button.stone .textured-block {
-  background: url('../../dev/stone.png');
+  background: url('../../assets/img/stone.png');
   background-repeat: repeat-x repeat-y;
   background-color: var(--color-gray-stone-light);
 }
