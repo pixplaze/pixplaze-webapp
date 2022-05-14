@@ -3,8 +3,6 @@ import HeaderNav from '@/components/HeaderNav'
 import { storeToRefs } from 'pinia'
 import { useGlobalStore } from '@/store/global.js'
 
-// const background = require('@/dev/assets/background.png')
-
 export default {
   name: 'holygrail-layout',
   components: {
@@ -77,7 +75,7 @@ header {
 footer {
   height: 300px;
   content: "";
-  background: url(../../dev/background.png);
+  background: url(../../assets/img/background.png);
 }
 
 .footer-info {
