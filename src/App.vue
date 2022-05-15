@@ -1,9 +1,3 @@
-<template>
-    <component :is="layout">
-      <router-view/>
-    </component>
-</template>
-
 <script>
 import RconConsole from '@/components/RconConsole'
 
@@ -23,6 +17,12 @@ export default {
   }
 }
 </script>
+
+<template>
+  <component :is="layout">
+    <router-view/>
+  </component>
+</template>
 
 <style>
 * {
