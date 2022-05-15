@@ -72,8 +72,7 @@ export default {
 }
 
 .textured-text span {
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto;
   font-family: 'Minecraft';
 }
 

@@ -1,12 +1,15 @@
 <script>
 import HeaderNav from '@/components/HeaderNav'
+import FooterInfo from '@/components/FooterInfo'
+
 import { storeToRefs } from 'pinia'
 import { useGlobalStore } from '@/store/global.js'
 
 export default {
   name: 'holygrail-layout',
   components: {
-    HeaderNav
+    HeaderNav,
+    FooterInfo
   },
   setup() {
     const global = useGlobalStore()
@@ -40,7 +43,7 @@ export default {
     </main>
   </div>
   <footer>
-    <!-- <div class="footer-info"></div> -->
+    <footer-info/>
   </footer>
 </div>
 </template>
@@ -52,6 +55,12 @@ export default {
 html, body, #app, .page-wrapper {
   height: 100%;
   background-color: var(--color-gray-silver);
+}
+
+.page-body {
+  display: flex;
+  overflow: hidden;
+  height: min-content;
 }
 
 .page-wrapper {
@@ -73,7 +82,6 @@ header {
 }
 
 footer {
-  height: 300px;
   content: "";
   background: url(../../assets/img/background.png);
 }
@@ -100,5 +108,21 @@ aside.expanded {
 main {
   width: 100%;
   background-color: var(--color-main-foreground);
+}
+</style>
+
+<style>
+@media screen and (max-width: 710px) {
+  .page-body.content {
+    padding: 0;
+  }
+
+  section.content.buttons>button {
+    width: 100%;
+    margin: 0;
+  }
+  .arrows {
+    justify-content: space-between;
+  }
 }
 </style>
