@@ -1,6 +1,10 @@
 <script>
+import RconConsole from "@/components/RconConsole"
 export default {
-  name: 'main-page'
+  name: 'main-page',
+  components: {
+    RconConsole
+  }
 }
 </script>
 
@@ -20,6 +24,10 @@ export default {
       <arrow-button :variant="'up'"/>
       <arrow-button :variant="'down'"/>
       <!-- <textured-button :variant="'stone'"></textured-button> -->
+    </section>
+
+    <section class="content">
+      <rcon-console/>
     </section>
   <!-- </template> -->
 </template>
