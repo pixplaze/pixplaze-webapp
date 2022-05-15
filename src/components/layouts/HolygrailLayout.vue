@@ -57,6 +57,9 @@ html, body, #app, .page-wrapper {
   background-color: var(--color-gray-silver);
 }
 
+.page-body.content, .footer-info.content {
+  padding-bottom: 50px;
+}
 .page-body {
   display: flex;
   overflow: hidden;
@@ -113,12 +116,15 @@ main {
 
 <style>
 @media screen and (max-width: 710px) {
-  .page-body.content {
-    padding: 0;
+  .page-body.content, .footer-info.content {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   section.content.buttons>button {
     width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 0;
   }
   .arrows {
