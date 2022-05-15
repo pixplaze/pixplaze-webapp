@@ -2,13 +2,16 @@
 export default {
   name: 'textured-button',
   props: {
-    variant: String
+    variant: {
+      type: String,
+      default: 'grass'
+    }
   }
 }
 </script>
 
 <template>
-  <button class="textured-button button" :class="variant? variant : ''" type="button">
+  <button class="textured-button button" :class="variant" type="button">
     <slot>Класс, блок</slot>
     <div class="textured-wrapper">
       <div class="textured-text"><span><slot>Класс, блок</slot></span></div>
@@ -20,16 +23,19 @@ export default {
 <style scoped>
 .textured-button {
   width: fit-content;
-
   border: none;
+
+  color: transparent;
+  transition: .3s ease;
 }
 
 .textured-wrapper {
+  z-index: 1;
   position: absolute;
+  overflow: hidden;
+
   top: 0;
   left: 0;
-  overflow: hidden;
-  z-index: 1;
   width: 100%;
   height: 100%;
 
@@ -75,7 +81,8 @@ export default {
   height: 70%;
 }
 
-.textured-button:active .textured-wrapper {
+.textured-button.grass:active .textured-wrapper,
+.textured-button.stone:active .textured-wrapper {
   transform: translateY(15px);
 }
 
@@ -89,5 +96,33 @@ export default {
 
 .textured-button.stone .textured-text {
   background-color: var(--color-gray-stone-light);
+}
+
+/* FLAT STYLE */
+
+.textured-button.flat {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: transparent;
+  box-shadow: 0 5px 0 0 rgba(161, 161, 161, 51%);
+}
+
+.textured-button.flat .textured-text {
+  height: 90%;
+  background-color: var(--color-green-grass-light);
+}
+
+.textured-button.flat .textured-block {
+  background: none;
+  background-color: var(--color-green-grass);
+}
+
+.textured-button.flat:hover {
+  box-shadow: 5px 5px 0 0 rgba(161, 161, 161, 51%);
+}
+
+.textured-button.flat:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 0 rgba(161, 161, 161, 51%);
 }
 </style>
