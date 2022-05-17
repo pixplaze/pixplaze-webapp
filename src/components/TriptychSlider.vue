@@ -20,21 +20,21 @@ export default {
           url: require('@/dev/slider/promo_village.png'),
           alt: ''
         },
-        // {
-        //   id: 3,
-        //   url: require('@/dev/slider/sunset_lands.png'),
-        //   alt: ''
-        // },
-        // {
-        //   id: 4,
-        //   url: require('@/dev/slider/twilight_lands.png'),
-        //   alt: ''
-        // },
-        // {
-        //   id: 5,
-        //   url: require('@/dev/slider/underwater_sun.png'),
-        //   alt: ''
-        // },
+        {
+          id: 3,
+          url: require('@/dev/slider/sunset_lands.png'),
+          alt: ''
+        },
+        {
+          id: 4,
+          url: require('@/dev/slider/twilight_lands.png'),
+          alt: ''
+        },
+        {
+          id: 5,
+          url: require('@/dev/slider/underwater_sun.png'),
+          alt: ''
+        },
       ]
     },
     itemWidth: {
