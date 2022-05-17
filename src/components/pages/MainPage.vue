@@ -1,9 +1,11 @@
 <script>
 import RconConsole from "@/components/RconConsole"
+import TriptychSlider from "@/components/TriptychSlider"
 export default {
   name: 'main-page',
   components: {
-    RconConsole
+    RconConsole,
+    TriptychSlider
   }
 }
 </script>
@@ -14,6 +16,9 @@ export default {
   </template> -->
   <!-- <template #main> -->
     <section class="content"><cubic-loader v-if="true" :variant="''"/></section>
+    <section class="content">
+      <triptych-slider/>
+    </section>
     <section class="content buttons">
       <textured-button :variant="'grass'">Трава</textured-button>
       <textured-button :variant="'stone'">Камень</textured-button>
