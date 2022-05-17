@@ -6,6 +6,9 @@ export default {
   components: {
     RconConsole,
     TriptychSlider
+  },
+  updated() {
+    console.log('main page updated')
   }
 }
 </script>
@@ -43,5 +46,15 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+</style>
+<style>
+img.item {
+  width: 500px;
+}
+@media screen and (max-width: 710px) {
+  img.item {
+    width: 300px!important;
+  }
 }
 </style>
