@@ -8,21 +8,36 @@ export default {
     TriptychSlider
   },
   data: () => ({
-    sliderItemWidth: 1000
+    sliderItemWidth: 500
   }),
   computed: {
     getSliderItemWidth() {
       return this.sliderItemWidth
     }
   },
-  mounted() {
-    window.addEventListener('resize', () => {
-      if (window.innerWidth <= 1200) {
-        this.sliderItemWidth = 300
-      } else {
-        this.sliderItemWidth = 1000
+  methods: {
+    resizeSlider() {
+      let width = window.innerWidth
+
+      if (width > 1200) {
+        this.sliderItemWidth = 500
+        return
       }
-    })
+
+      if (width > 710 && width < 1200) {
+        this.sliderItemWidth = 300
+        return
+      }
+      
+      if (width < 710) {
+        this.sliderItemWidth = 180
+        return
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.resizeSlider)
+    this.resizeSlider()
   }
 }
 </script>
@@ -65,10 +80,5 @@ export default {
 <style>
 img.item {
   width: 500px;
-}
-@media screen and (max-width: 710px) {
-  img.item {
-    width: 300px!important;
-  }
 }
 </style>
