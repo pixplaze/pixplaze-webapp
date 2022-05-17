@@ -8,7 +8,8 @@ export default {
     TriptychSlider
   },
   data: () => ({
-    sliderItemWidth: 500
+    sliderItemWidth: 500,
+    sliderCollapsed: false
   }),
   computed: {
     getSliderItemWidth() {
@@ -20,16 +21,19 @@ export default {
       let width = window.innerWidth
 
       if (width > 1200) {
+        this.sliderCollapsed = false
         this.sliderItemWidth = 500
         return
       }
 
       if (width > 710 && width < 1200) {
+        this.sliderCollapsed = false
         this.sliderItemWidth = 300
         return
       }
       
       if (width < 710) {
+        this.sliderCollapsed = true
         this.sliderItemWidth = 180
         return
       }
@@ -49,7 +53,7 @@ export default {
   <!-- <template #main> -->
     <section class="content"><cubic-loader v-if="true" :variant="''"/></section>
     <section class="content">
-      <triptych-slider :itemWidth="sliderItemWidth"/>
+      <triptych-slider :itemWidth="sliderItemWidth" :collapsed="sliderCollapsed"/>
     </section>
     <section class="content buttons">
       <textured-button :variant="'grass'">Трава</textured-button>

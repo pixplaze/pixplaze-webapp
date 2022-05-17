@@ -41,6 +41,10 @@ export default {
       type: Number,
       required: true,
       default: 500
+    },
+    collapsed: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -52,7 +56,7 @@ export default {
     lastItem: null,
     
     slideDisabled: false,
-
+    collapsedItemWidth: 0,
     listGap: 50,
   }),
   methods: {
@@ -82,6 +86,11 @@ export default {
         this.slideDisabled = false
       }, 500)
     },
+    resizeItem() {
+      if (this.collapsedItemWidth - this.frameElement.offsetWidth) {
+        this.collapsedItemWidth = this.frameElement.offsetWidth
+      }
+    },
     setFirstItem() {
       this.firstItem = this.displayItems[this.displayItems.length-1]
     },
@@ -91,11 +100,11 @@ export default {
   },
   computed: {
     itemBoundsStyle() {
-      let evenAddition = this.items.length % 2? 0 : this.itemWidth + this.listGap
-
-      let itemWidth = this.itemWidth
-      let itemGappedWidth = this.itemWidth + this.listGap
-      let outerWidth = this.itemWidth * this.items.length + this.listGap * (this.items.length - 1) - evenAddition
+      let itemWidth = this.collapsed? this.collapsedItemWidth : this.itemWidth
+      let evenAddition = this.items.length % 2? 0 : itemWidth + this.listGap
+      console.log('itemBound changed!')
+      let itemGappedWidth = itemWidth + this.listGap
+      let outerWidth = itemWidth * this.items.length + this.listGap * (this.items.length - 1) - evenAddition
       let outerMarginLeft = -itemGappedWidth * parseInt(this.items.length / 2) + evenAddition
       let listGap = this.listGap
 
@@ -106,6 +115,12 @@ export default {
         '--outer-margin-left': `${outerMarginLeft}px`,
         '--list-gap': `${listGap}px`
       }
+    }
+  },
+  updated() {
+    if (this.collapsed) {
+      window.addEventListener('resize', this.resizeItem, {once:true})
+      this.resizeItem()
     }
   },
   mounted() {
@@ -120,7 +135,7 @@ export default {
 </script>
 
 <template>
-<div class="slider" :style="itemBoundsStyle">
+<div class="slider" :class="{'collapsed': collapsed}" :style="itemBoundsStyle">
   <div ref="frame" class="slider-frame">
     <arrow-button :variant="'left'" :disabled="slideDisabled" @click="slideLeft"/>
       <div class="slider-outer">
@@ -173,6 +188,16 @@ export default {
   margin-bottom: auto;
 }
 
+.slider.collapsed .arrow-button.left {
+  left: 10px;
+  /* background-color: var(--color-green-grass-transparent); */
+}
+
+.slider.collapsed .arrow-button.right {
+  right: 10px;
+  /* background-color: var(--color-green-grass-transparent); */
+}
+
 .slider-frame {
   content: "";
   z-index: 1;
@@ -181,6 +206,10 @@ export default {
 
   margin-left: auto;
   margin-right: auto;
+}
+
+.slider.collapsed .slider-frame {
+  width: 100%;
 }
 
 .slider-inner.slide-left {
@@ -210,6 +239,10 @@ export default {
 img.item {
   transition: all .5s ease;
   width: var(--item-width);
+}
+
+.slider.collapsed img.item {
+  width: var(--item-width)
 }
 
 img.item.selected {
