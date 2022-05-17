@@ -36,6 +36,11 @@ export default {
         //   alt: ''
         // },
       ]
+    },
+    itemWidth: {
+      type: Number,
+      required: true,
+      default: 500
     }
   },
   data: () => ({
@@ -48,7 +53,6 @@ export default {
     
     slideDisabled: false,
 
-    itemWidth: 1000,
     listGap: 50,
   }),
   methods: {
@@ -86,7 +90,7 @@ export default {
     }
   },
   computed: {
-    itemBoundsStyle() { 
+    itemBoundsStyle() {
       let evenAddition = this.items.length % 2? 0 : this.itemWidth + this.listGap
 
       let itemWidth = this.itemWidth

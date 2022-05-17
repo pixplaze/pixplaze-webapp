@@ -7,8 +7,22 @@ export default {
     RconConsole,
     TriptychSlider
   },
-  updated() {
-    console.log('main page updated')
+  data: () => ({
+    sliderItemWidth: 1000
+  }),
+  computed: {
+    getSliderItemWidth() {
+      return this.sliderItemWidth
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 1200) {
+        this.sliderItemWidth = 300
+      } else {
+        this.sliderItemWidth = 1000
+      }
+    })
   }
 }
 </script>
@@ -20,7 +34,7 @@ export default {
   <!-- <template #main> -->
     <section class="content"><cubic-loader v-if="true" :variant="''"/></section>
     <section class="content">
-      <triptych-slider/>
+      <triptych-slider :itemWidth="sliderItemWidth"/>
     </section>
     <section class="content buttons">
       <textured-button :variant="'grass'">Трава</textured-button>
