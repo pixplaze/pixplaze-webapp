@@ -96,7 +96,7 @@ export default {
       let itemWidth = this.itemWidth
       let itemGappedWidth = this.itemWidth + this.listGap
       let outerWidth = this.itemWidth * this.items.length + this.listGap * (this.items.length - 1) - evenAddition
-      let outerMarginLeft = -itemGappedWidth * parseInt(this.items.length / 2)
+      let outerMarginLeft = -itemGappedWidth * parseInt(this.items.length / 2) + evenAddition
       let listGap = this.listGap
 
       return {
