@@ -1,11 +1,18 @@
 <script>
-import RconConsole from "@/components/RconConsole"
-import TriptychSlider from "@/components/TriptychSlider"
+import RconConsole from '@/components/RconConsole'
+import TriptychSlider from '@/components/TriptychSlider'
+import GlassPane from '@/components/GlassPane'
+import TextBox from '@/components/TextBox'
+import FloatBox from '@/components/FloatBox'
+
 export default {
   name: 'main-page',
   components: {
     RconConsole,
-    TriptychSlider
+    TriptychSlider,
+    GlassPane,
+    TextBox,
+    FloatBox,
   },
   data: () => ({
     sliderItemWidth: 500,
@@ -67,6 +74,15 @@ export default {
       <arrow-button :variant="'right'"/>
       <arrow-button :variant="'up'"/>
       <arrow-button :variant="'down'"/>
+    </section>
+    <section class="content">
+      <float-box class="glass message"><mc-button>Кнопка</mc-button><mc-button>Попка</mc-button></float-box>
+    </section>
+    <section class="content">
+      <text-box></text-box>
+    </section>
+    <section class="content" style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <glass-pane v-for="i in 20" :key="i">0{{i}}</glass-pane>
     </section>
     <section class="content">
       <rcon-console/>
