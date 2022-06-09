@@ -118,7 +118,7 @@ export default {
     }
   },
   updated() {
-    if (this.collapsed) {
+    if (this.collapsed) { // не оптимизировано
       window.addEventListener('resize', this.resizeItem, {once:true})
       this.resizeItem()
     }

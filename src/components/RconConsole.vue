@@ -153,7 +153,7 @@ export default {
     }
 
     * {
-        font-family: 'Consolas';
+        font-family: 'Minecraft';
         font-size: 16px;
     }
 
