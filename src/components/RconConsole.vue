@@ -1,4 +1,5 @@
 <script>
+import {sendCommand, fetchChatLines} from '@/api/minecraft_server'
 
 export default {
     name: 'rcon-console',
@@ -49,14 +50,22 @@ export default {
             if (this.currentHistoryIndex > 0)
                 this.currentHistoryIndex--
         },
-        submitConsoleInput() {
+        async submitConsoleInput() {
             this.putConsoleRow(this.consoleInputText)
-            if (this.consoleInputText == 'clear' || this.consoleInputText == 'clr') this.clearConsole()
+            if (this.consoleInputText == 'clear' || this.consoleInputText == 'clr') {
+                this.clearConsole()
+                return
+            }
+            console.log('sending command: ', this.consoleInputText)
+            await sendCommand(this.consoleInputText)
+            this.displayMessages = await fetchChatLines()
             this.consoleInputText = ''
         },
-        putConsoleRow(str) {
+        async putConsoleRow(str) {
             this.displayMessages.push(str)
-            if (str && str.trim().length) this.messages.push(str)
+            if (str && str.trim().length) {
+                this.messages.push(str)
+            }
         },
         scrollDown() {
             this.rconConsoleElement.scrollTop = this.rconConsoleElement.scrollHeight
