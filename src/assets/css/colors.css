@@ -18,4 +18,21 @@
   --color-gray-stone-light: #8F8F8F;
   --color-gray-silver: #F6F8FA;
   --color-gray-steel: #DDDDDD;
+
+  --color-minecraft-chat-§4: #AA0000;
+  --color-minecraft-chat-§c: #FF5555;
+  --color-minecraft-chat-§6: #FFAA00;
+  --color-minecraft-chat-§e: #FFFF55;
+  --color-minecraft-chat-§2: #00AA00;
+  --color-minecraft-chat-§a: #55FF55;
+  --color-minecraft-chat-§b: #55FFFF;
+  --color-minecraft-chat-§3: #00AAAA;
+  --color-minecraft-chat-§1: #0000AA;
+  --color-minecraft-chat-§9: #5555FF;
+  --color-minecraft-chat-§d: #FF55FF;
+  --color-minecraft-chat-§5: #AA00AA;
+  --color-minecraft-chat-§f: #FFFFFF;
+  --color-minecraft-chat-§7: #AAAAAA;
+  --color-minecraft-chat-§8: #555555;
+  --color-minecraft-chat-§0: #000000;
 }
