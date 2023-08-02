@@ -3,6 +3,7 @@ import MainPage from '@/components/pages/MainPage'
 import ProfilePage from '@/components/pages/ProfilePage'
 import ServersPage from '@/components/pages/ServersPage'
 import ServerPage from '@/components/pages/ServerPage'
+import LoginPage from '@/components/pages/LoginPage'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     meta: {
       layout: 'holygrail-layout'
     }
+  },
+  { // no need to define `meta`, since the default layout is already `holygrail-layout`
+    path: '/login',
+    name: 'login',
+    component: LoginPage
   },
   {
     path: '/profile/:id',

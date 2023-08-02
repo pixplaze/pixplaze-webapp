@@ -49,21 +49,14 @@ export default {
 </template>
 
 <style>
-/** */
-
-/** */
 html, body, #app, .page-wrapper {
   height: 100%;
   background-color: var(--color-gray-silver);
 }
 
-.page-body.content, .footer-info.content {
-  padding-bottom: 50px;
-}
 .page-body {
   display: flex;
-  overflow: hidden;
-  height: min-content;
+  box-sizing: border-box;
 }
 
 .page-wrapper {
@@ -84,6 +77,12 @@ header {
   content: "";
 }
 
+main {
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--color-main-foreground);
+}
+
 footer {
   content: "";
   background: url(../../assets/img/background.png);
@@ -91,10 +90,6 @@ footer {
 
 .footer-info {
   border-top: 2px solid var(--color-gray-steel);
-}
-
-.page-body {
-  display: flex;
 }
 
 aside {
@@ -108,10 +103,6 @@ aside.expanded {
 }
 
 
-main {
-  width: 100%;
-  background-color: var(--color-main-foreground);
-}
 </style>
 
 <style>
@@ -127,6 +118,7 @@ main {
     padding-bottom: 20px;
     margin: 0;
   }
+  
   .arrows {
     justify-content: space-between;
   }

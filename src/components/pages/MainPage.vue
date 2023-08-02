@@ -76,7 +76,7 @@ export default {
       <arrow-button :variant="'down'"/>
     </section>
     <section class="content">
-      <float-box class="glass message"><mc-button>Кнопка</mc-button><mc-button>Попка</mc-button></float-box>
+      <float-box class="glass message"><mc-button>Кнопка 1</mc-button><mc-button>Кнопка 2</mc-button></float-box>
     </section>
     <section class="content">
       <text-box></text-box>
