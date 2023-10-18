@@ -41,11 +41,20 @@ h3 {
     padding-left: 30px;
     padding-right: 30px;
   
-    font-family: 'Minecraft';
+    font-family: Minecraft, Arial, Helvetica, sans-serif;
     background-color: transparent;
   
     transition-property: box-shadow, border, background-color, padding;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
+}
+
+::-moz-selection {
+  background: var(--color-green-grass-light);
+}
+
+::selection {
+  color: white;
+  background: var(--color-green-grass-light);
 }

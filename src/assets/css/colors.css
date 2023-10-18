@@ -12,6 +12,10 @@
   --color-green-emerald-semi-dark: #1C9829; /*17DD62*/
   --color-green-emerald-dark: #007B18;
 
+  --color-green-grass-1: #73B349;
+  --color-green-grass-light-1: #97C667;
+  --color-green-grass-dark-1: #6BA81C;
+
   --color-brown-dark: #79553A; /*#55423A*/
   --color-brown-light: #966C4A;
 
@@ -35,4 +39,7 @@
   --color-minecraft-chat-§7: #AAAAAA;
   --color-minecraft-chat-§8: #555555;
   --color-minecraft-chat-§0: #000000;
+
+  --color-main-font: #444444;
+  --color-main-font-light: var(--color-main-foreground);
 }
