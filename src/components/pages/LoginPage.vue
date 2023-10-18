@@ -1,14 +1,13 @@
 <script>
 import CubicInput from '@/components/ui/CubicInput'
+import CubicButton from '@/components/ui/CubicButton'
 
 export default {
   name: 'login-page',
   components: {
-    CubicInput
-  },
-  data: () => ({
-
-  })
+    CubicInput,
+    CubicButton
+  }
 }
 
 </script>
@@ -18,8 +17,12 @@ export default {
     <cubic-input
       :id="'test-input'"
       :name="'test-input'"
-      :type="'password'"
+      :type="'text'"
+      :placeholder="'введите текст'"
     />
+    <cubic-button>
+      Жмакни
+    </cubic-button>
   </form>
 </template>
 
@@ -30,7 +33,8 @@ export default {
     padding-bottom: 50px;
   }
 
-  .login-form > input {
-    width: 300px;
+  .login-form > * {
+    margin-left: 20px;
+    margin-bottom: 20px;
   }
 </style>
