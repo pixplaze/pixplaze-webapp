@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable */
 import {sendCommand, fetchChatLines} from '@/api/minecraft_server'
 
 export default {
@@ -21,29 +22,29 @@ export default {
             } else {
                 this.consoleInputElement.focus()
             }
-            
+
         },
         onEnter(e) {
             if (e.code == 'Enter') {
                 this.submitConsoleInput()
-                this.currentHistoryIndex = this.messages.length
+                this.currentHistoryIndex = this.messageHistory.length
                 return
             }
             if (e.code == 'ArrowUp') {
                 this.decrementHistoryIndex()
-                this.consoleInputText = this.messages[this.currentHistoryIndex]
+                this.consoleInputText = this.messageHistory[this.currentHistoryIndex]
                 console.log(e.code)
                 return
             }
             if (e.code == 'ArrowDown') {
                 this.incrementHistoryIndex()
-                this.consoleInputText = this.messages[this.currentHistoryIndex]
+                this.consoleInputText = this.messageHistory[this.currentHistoryIndex]
                 console.log(e.code)
                 return
             }
         },
         incrementHistoryIndex() {
-            if (this.currentHistoryIndex < this.messages.length)
+            if (this.currentHistoryIndex < this.messageHistory.length)
                 this.currentHistoryIndex++
         },
         decrementHistoryIndex() {
@@ -51,21 +52,37 @@ export default {
                 this.currentHistoryIndex--
         },
         async submitConsoleInput() {
-            this.putConsoleRow(this.consoleInputText)
-            if (this.consoleInputText == 'clear' || this.consoleInputText == 'clr') {
-                this.clearConsole()
-                return
+            switch (this.consoleInputText) {
+                case 'clear':
+                case 'cls':
+                case 'cln':
+                    this.clearConsole();
+                    break;
+                case '-close':
+                    this.ws.close();
+                    break;
+                case '-open':
+                    this.ws.connect();
+                    break;
             }
+
+            this.pushConsoleRow(this.consoleInputText);
+            this.ws.send(this.consoleInputText);
+            this.clearConsoleRow();
+            return // TODO: REMOVE
             console.log('sending command: ', this.consoleInputText)
             await sendCommand(this.consoleInputText)
             this.displayMessages = await fetchChatLines()
-            this.consoleInputText = ''
+            
         },
-        async putConsoleRow(str) {
-            this.displayMessages.push(str)
+        pushConsoleRow(str) {
             if (str && str.trim().length) {
-                this.messages.push(str)
+                this.displayMessages.push(str)
+                this.messageHistory.push(str)
             }
+        },
+        clearConsoleRow() {
+            this.consoleInputText = '';
         },
         scrollDown() {
             this.rconConsoleElement.scrollTop = this.rconConsoleElement.scrollHeight
@@ -76,13 +93,14 @@ export default {
         }
     },
     data: () => ({
-        messages: [],
+        messageHistory: [],
         displayMessages: [],
         focused: false,
         consoleInputText: '',
         rconConsoleElement: null,
         consoleInputElement: null,
-        currentHistoryIndex: -1
+        currentHistoryIndex: -1,
+        ws: new WebSocket("ws://localhost:25566/chat")
     }),
     setup() {},
     updated() {
@@ -97,6 +115,13 @@ export default {
         this.consoleInputElement.addEventListener('keyup', this.onEnter)
 
         this.scrollDown()
+        this.ws.onmessage = message => {
+            this.displayMessages.push(message.data);
+            console.log(message)
+        }
+        this.ws.onopen = () => this.displayMessages.push("CONNECTED");
+        this.ws.onclose = () => this.displayMessages.push("DISCONNECTED");
+        
     },
     unmounted() {
         this.consoleInputElement.removeEventListener('keyup', this.onEnter)
