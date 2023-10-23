@@ -1,10 +1,7 @@
 <script>
-import RconConsole from '@/components/RconConsole'
-
 export default {
   name: 'App',
   components: {
-    RconConsole,
     // HolygrailTemplate
   },
   data: () => ({loaded: false}),
