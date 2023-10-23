@@ -1,5 +1,5 @@
 <script>
-import RconConsole from '@/components/RconConsole'
+import CommandPrompt from '@/components/CommandPrompt'
 import TriptychSlider from '@/components/TriptychSlider'
 import GlassPane from '@/components/GlassPane'
 import TextBox from '@/components/TextBox'
@@ -8,7 +8,7 @@ import FloatBox from '@/components/FloatBox'
 export default {
   name: 'main-page',
   components: {
-    RconConsole,
+    CommandPrompt,
     TriptychSlider,
     GlassPane,
     TextBox,
@@ -85,7 +85,7 @@ export default {
       <glass-pane v-for="i in 20" :key="i">0{{i}}</glass-pane>
     </section>
     <section class="content">
-      <rcon-console/>
+      <command-prompt/>
     </section>
   <!-- </template> -->
 </template>
