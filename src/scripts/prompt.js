@@ -1,16 +1,14 @@
 function concatWithCapacity(firstArray, secondArray, capacity) {
-  let newLength = firstArray.length + secondArray.length;
-  let newArray;
-  // console.log(firstArray);
-  // console.log(secondArray);
-  // console.log(`${firstArray.length} + ${secondArray.length} = ${firstArray.length + secondArray.length}, of ${capacity}`);
-  if (newLength > capacity) {
-    newArray = firstArray.slice(newLength - capacity).concat(secondArray)
-  } else {
-    newArray = firstArray.concat(secondArray);
-  }
+  const newLength = firstArray.length + secondArray.length;
+  const overflow = newLength - capacity;
 
-  return newArray;
+  if (overflow <= 0) {
+    return firstArray.concat(secondArray);
+  } else if (overflow > firstArray.length) {
+    return secondArray.slice(overflow - firstArray.length);
+  } else {
+    return firstArray.slice(overflow).concat(secondArray);
+  }
 }
 
 /**
