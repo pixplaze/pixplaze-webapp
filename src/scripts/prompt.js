@@ -24,7 +24,7 @@ function concatWithCapacity(firstArray, secondArray, capacity) {
  *
  * @param rows
  * @param options
- * @returns {{messages: (function(): String[]), renew: *, enter: *, history: (function(): {decrement: function(): number, reset: function(): number, increment: function(): number, list: function(): String[], peek: function(): String}), push: *}}
+ * @returns {{clear: (function(): *[]), messages: (function(): *[]), renew: *, enter: *, history: (function(): {decrement: function(): number, reset: function(): number, increment: function(): number, list: function(): *, peek: function(): *}), push: *}}
  */
 const createPrompt = (rows, options) => {
   const config = {
@@ -40,6 +40,7 @@ const createPrompt = (rows, options) => {
 
   return {
     messages: () => [...messages],
+    clear: () => messages = [],
     push: lines => {
       if (!Array.isArray(lines)) throw new Error('Only string array value can be pushed in display messages!')
       messages = concatWithCapacity(messages, lines, config.messagesCapacity);
@@ -50,15 +51,16 @@ const createPrompt = (rows, options) => {
     },
     enter: row => {
       if (!(typeof row === 'string')) throw new Error('String value only can be entered in the prompt!');
+      if (!row.trim()) return;
       history.lines =  concatWithCapacity(history.lines, [row], config.historyCapacity);
       history.index = history.lines.length - 1;
     },
     history: () => ({
       reset: () => history.index = history.lines.length - 1,
-      increment: () => history.index < history.lines ? history.index++ : history.index,
+      increment: () => history.index < history.lines.length ? history.index++ : history.index,
       decrement: () => history.index > 0 ? history.index-- : history.index,
       list: () => [...history.lines],
-      peek: () => history.lines[history.index]
+      peek: () => history.lines[history.index] // TODO: RETURN LAST ON history.index === history.lines.length - 1
     })
   }
 }
