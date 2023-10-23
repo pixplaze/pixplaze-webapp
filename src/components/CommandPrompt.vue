@@ -1,9 +1,10 @@
 <script>
 /* eslint-disable */
 import createWebSocket from '@/api/ws.config';
+import {createPrompt} from '@/scripts/prompt';
 
 export default {
-  name: 'rcon-console',
+  name: 'command-prompt',
   components: {},
   props: {
     username: {
@@ -15,68 +16,65 @@ export default {
       default: 'pixplaze'
     }
   },
+  data: () => ({
+    focused: false,
+    consoleInputText: '',
+    rconConsoleElement: null,
+    consoleInputElement: null,
+    prompt: null,
+    ws: null,
+    messages: []
+  }),
   methods: {
     onClick() {
-      if (this.focused) {
-        return;
-      }
+      if (this.focused) return;
       this.consoleInputElement.focus()
     },
     onEnter(e) {
-      if (e.code === 'Enter') {
-        this.submitConsoleInput()
-        this.currentHistoryIndex = this.messageHistory.length
-        return
-      }
-      if (e.code === 'ArrowUp') {
-        this.decrementHistoryIndex()
-        this.consoleInputText = this.messageHistory[this.currentHistoryIndex]
-        console.log(e.code)
-        return
-      }
-      if (e.code === 'ArrowDown') {
-        this.incrementHistoryIndex()
-        this.consoleInputText = this.messageHistory[this.currentHistoryIndex]
-        console.log(e.code)
+      switch (e.code) {
+        case 'Enter':
+          this.resolveInputRow(this.consoleInputText);
+          break;
+        case 'ArrowUp':
+          this.prompt.history().decrement();
+          this.consoleInputText = this.prompt.history().peek();
+          console.log('ARROW UP', this.prompt.history().peek());
+          break;
+        case 'ArrowDown':
+          this.prompt.history().increment();
+          this.consoleInputText = this.prompt.history().peek();
+          console.log('ARROW DOWN', this.prompt.history().peek());
+          break;
       }
     },
-    incrementHistoryIndex() {
-      if (this.currentHistoryIndex < this.messageHistory.length)
-        this.currentHistoryIndex++
-    },
-    decrementHistoryIndex() {
-      if (this.currentHistoryIndex > 0)
-        this.currentHistoryIndex--
-    },
-    async submitConsoleInput() {
-      switch (this.consoleInputText) {
+    resolveInputRow(row) {
+      this.prompt.history().list(); // TODO: DELETE DEBUG
+      switch (row) {
         case 'clear':
         case 'cls':
         case 'cln':
-          this.clearConsole();
-          this.clearConsoleRow();
+          this.prompt.clear();
+          this.prompt.enter(row);
+          this.clearInputRow();
           return;
         case '-close':
           this.ws.close();
-          this.clearConsoleRow();
+          this.prompt.enter(row);
+          this.clearInputRow();
           return;
         case '-open':
           this.ws.open();
-          this.clearConsoleRow();
+          this.prompt.enter(row);
+          this.clearInputRow();
           return;
       }
 
-      this.pushConsoleRow(this.consoleInputText);
-      this.ws.send(this.consoleInputText);
-      this.clearConsoleRow();
+      this.ws.send(row);
+      this.prompt.enter(row);
+      this.prompt.push([row]);
+      this.clearInputRow();
     },
-    pushConsoleRow(str) {
-      if (str && str.trim().length) {
-        this.displayMessages.push(str)
-        this.messageHistory.push(str)
-      }
-    },
-    clearConsoleRow() {
+    clearInputRow() {
       this.consoleInputText = '';
     },
     scrollDown() {
@@ -88,35 +86,35 @@ export default {
       this.rconConsoleElement.scrollTop = this.rconConsoleElement.scrollHeight;
       console.log(this.rconConsoleElement.scrollHeight, this.rconConsoleElement.scrollTop);
     },
-    clearConsole() {
-      // this.messages = []
-      this.displayMessages = []
+    initializeMinecraftPrompt() {
+      this.prompt = createPrompt([], {
+        historyCapacity: 10,
+        messagesCapacity: 10,
+      });
+    },
+    async initializeWebSocket() {
+      this.ws = createWebSocket('localhost:25566', 'chat', 'ws');
+      this.ws.open();
+      this.ws.onopen = () => {
+        console.log('CONNECTED:');
+      };
+      this.ws.onclose = () => this.prompt.push("DISCONNECTED");
+      this.ws.onmessage = async event => {
+        this.prompt.push(JSON.parse(event.data));
+        this.messages = this.prompt.messages();
+        console.log('MESSAGE RECEIVED', this.prompt.messages().length)
+      }
     }
   },
-  data: () => ({
-    messageHistory: [],
-    displayMessages: [],
-    focused: false,
-    consoleInputText: '',
-    rconConsoleElement: null,
-    consoleInputElement: null,
-    currentHistoryIndex: -1,
-    ws: null
-  }),
-  // watch: {
-  //   displayMessages: {
-  //     handler() {
-  //       this.scrollDown();
-  //     },
-  //     // deep: true
-  //   }
-  // },
-  setup() {
-  },
+  setup() {},
   updated() {
     // Возможно не самый оптимизированый вариант, скроллит вниз при каждом вводе буквы
     // Можно заменить на проверку обновления списка сообщений
     this.scrollDown();
+  },
+  beforeMount() {
+    this.initializeMinecraftPrompt();
+    this.initializeWebSocket();
   },
   mounted() {
     this.rconConsoleElement = this.$refs.rconConsoleElement
@@ -125,18 +123,6 @@ export default {
     this.consoleInputElement.addEventListener('keyup', this.onEnter)
 
     this.scrollDown();
-    this.ws = createWebSocket('localhost:25566', 'chat', 'ws');
-    this.ws.open();
-    this.ws.onopen = () => this.displayMessages.push("CONNECTED");
-    this.ws.onclose = () => this.displayMessages.push("DISCONNECTED");
-
-    this.ws.onmessage = event => {
-      const messages = JSON.parse(event.data);
-
-      this.displayMessages = [].concat.apply(this.displayMessages, messages);
-      this.scrollDown();
-      console.log('MESSAGE RECEIVED')
-    }
   },
   unmounted() {
     this.consoleInputElement.removeEventListener('keyup', this.onEnter);
@@ -151,15 +137,16 @@ export default {
   <div class="rcon-console" ref="rconConsoleElement" @click="onClick">
     <div class="console-canvas">
       <div class="console-row"
-           v-for="(message, i) in displayMessages"
+           v-if="this.prompt"
+           v-for="(message, i) in this.messages"
            :key="i">
-        <pre>{{ username + '@' + domain + ' $ ' }}{{ message }}</pre>
+        <pre>{{ message }}</pre>
       </div>
       <div class="console-input"
            :class="{'focused': focused}">
         <div>
           <label for="rcon-console-input" class="input-predicat">
-            {{ username + '@' + domain + ' $ ' }}
+            /
           </label>
         </div>
 
@@ -242,11 +229,14 @@ pre {
 
 .input-predicat {
   display: block;
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  /* margin-right: 10px; */
+  padding: 5px 10px 5px 10px;
+
+  margin-right: 10px;
 
   color: yellow;
+}
+
+.console-input.focused .input-predicat {
+  background-color: #ffffff30;
 }
 </style>
