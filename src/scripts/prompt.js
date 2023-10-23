@@ -41,19 +41,21 @@ const createPrompt = (rows, options) => {
   return {
     messages: () => [...messages],
     clear: () => messages = [],
-    push: lines => {
-      if (!Array.isArray(lines)) throw new Error('Only string array value can be pushed in display messages!')
-      messages = concatWithCapacity(messages, lines, config.messagesCapacity);
+    push: rows => {
+      if (!(Array.isArray(rows) || typeof rows === 'string')) throw new Error('Only string array or flat string value can be pushed in display messages!')
+      if (typeof rows === 'string') rows = [rows]
+      messages = concatWithCapacity(messages, rows, config.messagesCapacity);
     },
     renew: rows => {
-      if (!Array.isArray(rows)) throw new Error('Only string array value can be pushed in display messages!');
+      if (!(Array.isArray(rows) || typeof rows === 'string')) throw new Error('Only string array or flat string value can be pushed in display messages!');
+      if (typeof rows === 'string') rows = [rows]
       messages = concatWithCapacity(rows, [], config.messagesCapacity);
     },
     enter: row => {
       if (!(typeof row === 'string')) throw new Error('String value only can be entered in the prompt!');
       if (!row.trim()) return;
       history.lines =  concatWithCapacity(history.lines, [row], config.historyCapacity);
-      history.index = history.lines.length - 1;
+      history.index = history.lines.length;
     },
     history: () => ({
       reset: () => history.index = history.lines.length - 1,
